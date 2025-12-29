@@ -1,3 +1,24 @@
+## Portable filesystem layout
+
+This fork modifies the default filesystem layout to make DOSBox Staging fully portable.
+This change is intended for portable and removable-media deployments
+and is not present in upstream builds.
+
+### Differences from upstream
+
+In upstream DOSBox Staging on Windows, configuration, captures, and runtime data
+are stored in:
+
+C:\Users\<user>\AppData\Local\DOSBox
+
+In this fork, all such data is stored in the current working directory:
+
+./
+
+This allows the emulator to be used as a self-contained portable application
+without relying on per-user OS-specific data directories.
+
+
 # DOSBox Staging
 
 ![GPL-2.0-or-later][gpl-badge]
