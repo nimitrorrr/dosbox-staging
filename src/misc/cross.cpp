@@ -183,21 +183,13 @@ static std_fs::path cached_config_dir = {};
 void init_config_dir()
 {
 	if (cached_config_dir.empty()) {
-		// Check if a portable layout exists
-		const auto portable_conf_path = get_executable_path() /
-		                                get_primary_config_name();
+		// Always use portable layout (next to executable)
+		const auto conf_dir = get_executable_path();
 
-		std::error_code ec = {};
-		if (std_fs::is_regular_file(portable_conf_path, ec)) {
-			const auto conf_dir = portable_conf_path.parent_path();
+		LOG_MSG("CONFIG: Using portable configuration layout in '%s'",
+		        conf_dir.string().c_str());
 
-			LOG_MSG("CONFIG: Using portable configuration layout in '%s'",
-			        conf_dir.string().c_str());
-
-			cached_config_dir = conf_dir;
-		} else {
-			cached_config_dir = get_or_create_config_dir();
-		}
+		cached_config_dir = conf_dir;
 	}
 }
 
